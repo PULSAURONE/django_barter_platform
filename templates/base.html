@@ -23,7 +23,11 @@
                         <span class="navbar-text">Привет, {{ user.username }}!</span>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'logout' %}">Выйти</a>
+                        {# ИЗМЕНЕННЫЙ КОД ЗДЕСЬ: ЗАМЕНА ССЫЛКИ НА ФОРМУ ДЛЯ ВЫХОДА #}
+                        <form action="{% url 'logout' %}" method="post" class="form-inline my-2 my-lg-0">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-link nav-link" style="padding: 0; border: none; background: none; color: rgba(0,0,0,.5);">Выйти</button>
+                        </form>
                     </li>
                 {% else %}
                     <li class="nav-item">
