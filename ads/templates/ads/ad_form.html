@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {# Проверяем, есть ли у нас объект 'ad' (значит, это редактирование) или нет (значит, создание) #}
+    {% if object %}
+        <h1>Редактировать объявление</h1>
+    {% else %}
+        <h1>Создать новое объявление</h1>
+    {% endif %}
+
+    <form method="post">
+        {% csrf_token %}
+
+        {# Используем form.as_p для быстрой отрисовки полей формы в параграфах #}
+        {# Для более тонкой настройки можно итерировать поля, как в форме регистрации #}
+        <div class="form-group">
+            {{ form.as_p }}
+        </div>
+
+        <button type="submit" class="btn btn-success">
+            {% if object %}
+                Сохранить изменения
+            {% else %}
+                Создать объявление
+            {% endif %}
+        </button>
+        <a href="{% url 'ad_list' %}" class="btn btn-secondary">Отмена</a>
+    </form>
+{% endblock %}

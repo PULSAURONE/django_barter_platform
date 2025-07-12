@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Вход на сайт</h2>
+
+    {% if form.errors %}
+        <div class="alert alert-danger">
+            <p>Ваше имя пользователя и пароль не совпадают. Пожалуйста, попробуйте еще раз.</p>
+        </div>
+    {% endif %}
+
+    {% if next %}
+        <div class="alert alert-info">
+            <p>Пожалуйста, войдите, чтобы увидеть эту страницу.</p>
+        </div>
+    {% endif %}
+
+    <form method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="id_username">Имя пользователя:</label>
+            {{ form.username }}
+        </div>
+        <div class="form-group">
+            <label for="id_password">Пароль:</label>
+            {{ form.password }}
+        </div>
+        <button type="submit" class="btn btn-primary">Войти</button>
+        <input type="hidden" name="next" value="{{ next }}">
+    </form>
+    
+    <hr>
+    <p>Еще нет аккаунта? <a href="{% url 'register' %}">Зарегистрируйтесь!</a></p>
+
+{% endblock %}

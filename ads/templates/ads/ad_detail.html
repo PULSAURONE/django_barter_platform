@@ -1,0 +1,21 @@
+<!-- ads/templates/ads/ad_detail.html -->
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>{{ ad.title }}</h1>
+    <p><strong>Автор:</strong> {{ ad.user.username }}</p>
+    <!-- ... другая информация об объявлении ... -->
+
+    {% if user.is_authenticated %}
+        {# Показываем кнопку "Предложить обмен", если это не объявление текущего пользователя #}
+        {% if ad.user != user %}
+            <a href="{% url 'proposal_create' ad_receiver_id=ad.pk %}" class="btn btn-success">Предложить обмен</a>
+        {% endif %}
+
+        {# Показываем кнопки "Редактировать" и "Удалить", если это объявление текущего пользователя #}
+        {% if ad.user == user %}
+            <a href="{% url 'ad_update' ad.pk %}" class="btn btn-primary">Редактировать</a>
+            <a href="{% url 'ad_delete' ad.pk %}" class="btn btn-danger">Удалить</a>
+        {% endif %}
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,24 @@
+# --- Core Frameworks ---
+Django~=5.0
+djangorestframework
+
+# --- Database Drivers ---
+# Используйте для подключения к PostgreSQL в продакшене
+psycopg2-binary~=2.9.9
+
+# --- Image Handling ---
+# Необходим для работы с ImageFieldL
+Pillow~=10.1.0
+
+# --- Environment Variables ---
+# Для безопасного управления настройками (SECRET_KEY, DB_PASSWORD и т.д.)
+python-decouple~=3.8
+
+# --- Testing ---
+# Для более удобного и мощного тестирования
+pytest~=7.4.3
+pytest-django~=4.7.0
+
+# --- Production Server ---
+# WSGI-сервер для запуска приложения в продакшене (не используется в режиме разработки)
+gunicorn~=21.2.0

@@ -1,0 +1,61 @@
+<!-- ads/templates/ads/proposal_list.html -->
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Мои предложения обмена</h1>
+    <hr>
+
+    <h2>Входящие предложения (Вам предлагают обмен)</h2>
+    {% for proposal in incoming_proposals %}
+        <div class="card mb-3">
+            <div class="card-header">
+                Предложение от <strong>{{ proposal.ad_sender.user.username }}</strong>
+            </div>
+            <div class="card-body">
+                <p>
+                    Предлагает свое объявление "<a href="{% url 'ad_detail' proposal.ad_sender.pk %}">{{ proposal.ad_sender.title }}</a>"
+                    в обмен на ваше "<a href="{% url 'ad_detail' proposal.ad_receiver.pk %}">{{ proposal.ad_receiver.title }}</a>".
+                </p>
+                {% if proposal.comment %}
+                    <p class="card-text"><strong>Комментарий:</strong> <em>{{ proposal.comment }}</em></p>
+                {% endif %}
+                <p>Статус: <strong>{{ proposal.get_status_display }}</strong></p>
+
+                {# Кнопки для принятия/отклонения показываем только для предложений в статусе "Ожидает" #}
+                {% if proposal.status == 'pending' %}
+                    <a href="{% url 'proposal_update_status' pk=proposal.pk status='accepted' %}" class="btn btn-sm btn-success">Принять</a>
+                    <a href="{% url 'proposal_update_status' pk=proposal.pk status='rejected' %}" class="btn btn-sm btn-danger">Отклонить</a>
+                {% endif %}
+            </div>
+        </div>
+    {% empty %}
+        <div class="alert alert-secondary">
+            У вас нет входящих предложений.
+        </div>
+    {% endfor %}
+
+    <hr>
+
+    <h2>Исходящие предложения (Вы предложили обмен)</h2>
+    {% for proposal in outgoing_proposals %}
+        <div class="card mb-3">
+             <div class="card-header">
+                Ваше предложение для <strong>{{ proposal.ad_receiver.user.username }}</strong>
+            </div>
+            <div class="card-body">
+                <p>
+                    Вы предложили свое объявление "<a href="{% url 'ad_detail' proposal.ad_sender.pk %}">{{ proposal.ad_sender.title }}</a>"
+                    в обмен на "<a href="{% url 'ad_detail' proposal.ad_receiver.pk %}">{{ proposal.ad_receiver.title }}</a>".
+                </p>
+                {% if proposal.comment %}
+                    <p class="card-text"><strong>Комментарий:</strong> <em>{{ proposal.comment }}</em></p>
+                {% endif %}
+                <p>Статус: <strong>{{ proposal.get_status_display }}</strong></p>
+            </div>
+        </div>
+    {% empty %}
+        <div class="alert alert-secondary">
+            У вас нет исходящих предложений.
+        </div>
+    {% endfor %}
+{% endblock %}

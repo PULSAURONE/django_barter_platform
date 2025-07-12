@@ -1,0 +1,49 @@
+<!-- templates/ads/ad_list.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Список объявлений</h1>
+  <!-- Форма поиска и фильтрации -->
+  <form method="get" class="form-inline mb-4">
+      <input type="text" name="q" class="form-control mr-2" placeholder="Поиск..." value="{{ request.GET.q }}">
+      <input type="text" name="category" class="form-control mr-2" placeholder="Категория" value="{{ request.GET.category }}">
+      <select name="condition" class="form-control mr-2">
+          <option value="">Все состояния</option>
+          <option value="new" {% if request.GET.condition == 'new' %}selected{% endif %}>Новый</option>
+          <option value="used" {% if request.GET.condition == 'used' %}selected{% endif %}>Б/у</option>
+      </select>
+      <button type="submit" class="btn btn-primary">Найти</button>
+  </form>
+
+  <div class="row">
+      {% for ad in ads %}
+          <div class="col-md-4 mb-4">
+              <div class="card">
+                  {% if ad.image_url %}<img src="{{ ad.image_url }}" class="card-img-top" alt="{{ ad.title }}">{% endif %}
+                  <div class="card-body">
+                      <h5 class="card-title"><a href="{% url 'ad_detail' ad.pk %}">{{ ad.title }}</a></h5>
+                      <p class="card-text">{{ ad.description|truncatewords:20 }}</p>
+                      <p class="card-text"><small class="text-muted">Автор: {{ ad.user.username }} | Категория: {{ ad.category }}</small></p>
+                  </div>
+              </div>
+          </div>
+      {% empty %}
+          <p>Объявлений пока нет.</p>
+      {% endfor %}
+  </div>
+
+  <!-- Пагинация -->
+  {% if is_paginated %}
+      <nav>
+          <ul class="pagination">
+              {% if page_obj.has_previous %}
+                  <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Назад</a></li>
+              {% endif %}
+              <li class="page-item active"><span class="page-link">{{ page_obj.number }}</span></li>
+              {% if page_obj.has_next %}
+                  <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Вперед</a></li>
+              {% endif %}
+          </ul>
+      </nav>
+  {% endif %}
+{% endblock %}

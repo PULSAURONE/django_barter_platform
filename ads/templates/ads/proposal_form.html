@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Предложить обмен</h1>
+    <hr>
+
+    <div class="alert alert-info">
+        Вы предлагаете одно из своих объявлений в обмен на:
+        <h5><strong>"{{ ad_receiver.title }}"</strong> (автор: {{ ad_receiver.user.username }})</h5>
+    </div>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <label for="{{ form.ad_sender.id_for_label }}">{{ form.ad_sender.label }}:</label>
+            {{ form.ad_sender }}
+            {% if form.ad_sender.errors %}
+                <div class="alert alert-danger mt-1">
+                    {{ form.ad_sender.errors|join:", " }}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.comment.id_for_label }}">{{ form.comment.label }}:</label>
+            {{ form.comment }}
+            {% if form.comment.errors %}
+                 <div class="alert alert-danger mt-1">
+                    {{ form.comment.errors|join:", " }}
+                </div>
+            {% endif %}
+        </div>
+
+        {# Вывод общих ошибок формы (например, "нельзя меняться с собой") #}
+        {% if form.non_field_errors %}
+            <div class="alert alert-danger">
+                {% for error in form.non_field_errors %}
+                    <p>{{ error }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <button type="submit" class="btn btn-success">Отправить предложение</button>
+        <a href="{% url 'ad_detail' ad_receiver.pk %}" class="btn btn-secondary">Отмена</a>
+    </form>
+{% endblock %}
