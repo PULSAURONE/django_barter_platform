@@ -32,18 +32,21 @@ ________________________________________
 •	Git
 Шаги по Установке
 1.	Клонирование репозитория:
-      git clone https://github.com/PULSAURON/django_barter_platform.git
+
+  	 git clone https://github.com/PULSAURON/django_barter_platform.git
 cd django_barter_platform
     
 (Пожалуйста, убедитесь, что URL соответствует вашему актуальному приватному репозиторию.)
 2.	Создание и активация виртуального окружения:
 Для Windows (PowerShell/CMD):
+     
       python -m venv venv
 .\venv\Scripts\activate
     
 
 Для macOS / Linux / Git Bash:
-Generated bash
+
+
       python3 -m venv venv
 source venv/bin/activate
     
@@ -63,6 +66,7 @@ gunicorn~=21.2.0
     
 
 Затем установите зависимости:
+   
       pip install -r requirements.txt
     
 
@@ -101,17 +105,19 @@ SECRET_KEY = 'ВАШ_СЛУЧАЙНЫЙ_СЕКРЕТНЫЙ_КЛЮЧ_ДЛЯ_РА�
 (Пример: SECRET_KEY = 'django-insecure-uqa*jldtw3h&^j5%7-uz&zdvh72k)%$iy2)dp3+xm+d++x!^kp'. Используйте ключ, сгенерированный Django.)
 6.	Применение миграций базы данных:
 Generated bash
+    
       python manage.py migrate
     
 
 7.	Создание суперпользователя (для доступа к админ-панели):
 Generated bash
-      python manage.py createsuperuser
+
+  	 python manage.py createsuperuser
     
 
 (Следуйте инструкциям в терминале.)
 8.	Запуск сервера для разработки:
-Generated bash
+
       python manage.py runserver
     
 
@@ -119,5 +125,6 @@ Generated bash
 Административная панель: http://127.0.0.1:8000/admin/
 9.	Запуск тестов:
 Чтобы убедиться в корректной работе приложения:
+   
       python manage.py test
     
