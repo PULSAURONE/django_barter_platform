@@ -93,7 +93,9 @@ Thumbs.db
 
 # bpp_project/bpp_project/local_settings.py
 SECRET_KEY = 'ВАШ_СЛУЧАЙНЫЙ_СЕКРЕТНЫЙ_КЛЮЧ_ДЛЯ_РАЗРАБОТКИ'
-(Пример: SECRET_KEY = 'django-insecure-uqa*jldtw3h&^j5%7-uz&zdvh72k)%$iy2)dp3+xm+d++x!^kp'. Используйте ключ, сгенерированный Django.)
+(Пример: SECRET_KEY = 
+'django-insecure-uqa*jldtw3h&^j5%7-uz&zdvh72k)%$iy2)dp3+xm+d++x!^kp'. 
+Используйте ключ, сгенерированный Django.)
 
 Применение миграций базы данных:
 python manage.py migrate
