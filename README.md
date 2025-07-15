@@ -31,7 +31,6 @@ Python 3.8+
 Git
 Шаги по Установке
 Клонирование репозитория:
-Copy
 git clone https://github.com/PULSAURON/django_barter_platform.git
 cd django_barter_platform
 (Пожалуйста, убедитесь, что URL соответствует вашему актуальному приватному репозиторию.)
@@ -39,12 +38,10 @@ cd django_barter_platform
 Создание и активация виртуального окружения:
 Для Windows (PowerShell/CMD):
 
-Copy
 python -m venv venv
 .\venv\Scripts\activate
 Для macOS / Linux / Git Bash:
 
-Copy
 python3 -m venv venv
 source venv/bin/activate
 (Вы увидите (venv) или (.venv) в начале командной строки.)
@@ -94,27 +91,23 @@ Thumbs.db
 Настройка SECRET_KEY:
 Создайте файл local_settings.py в директории bpp_project/bpp_project/ (рядом с settings.py). Укажите в нём свой секретный ключ:
 
-Copy
 # bpp_project/bpp_project/local_settings.py
 SECRET_KEY = 'ВАШ_СЛУЧАЙНЫЙ_СЕКРЕТНЫЙ_КЛЮЧ_ДЛЯ_РАЗРАБОТКИ'
 (Пример: SECRET_KEY = 'django-insecure-uqa*jldtw3h&^j5%7-uz&zdvh72k)%$iy2)dp3+xm+d++x!^kp'. Используйте ключ, сгенерированный Django.)
 
 Применение миграций базы данных:
-Copy
 python manage.py migrate
+
 Создание суперпользователя (для доступа к админ-панели):
-Copy
 python manage.py createsuperuser
 (Следуйте инструкциям в терминале.)
 
 Запуск сервера для разработки:
-Copy
 python manage.py runserver
+
 Приложение будет доступно по адресу: http://127.0.0.1:8000/
 Административная панель: http://127.0.0.1:8000/admin/
 
 Запуск тестов:
 Чтобы убедиться в корректной работе приложения:
-
-Copy
 python manage.py test
